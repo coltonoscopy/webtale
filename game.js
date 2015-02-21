@@ -1,3 +1,4 @@
+var http = require("http");
 var util = require("util");
 var io = require("socket.io")({
     'transports': ['websocket']
@@ -88,3 +89,9 @@ function playerById(id) {
 }
 
 init();
+http.createServer(onRequest).listen(8120);
+
+function onRequest(req, res) {
+    res.write("Response from port 8120!");
+    res.end();
+}
