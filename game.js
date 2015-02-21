@@ -13,8 +13,6 @@ function init() {
 
     socket = io.listen(8120);
 
-    console.log(socket);
-
     setEventHandlers();
 }
 
@@ -89,9 +87,3 @@ function playerById(id) {
 }
 
 init();
-http.createServer(onRequest).listen(8120);
-
-function onRequest(req, res) {
-    res.write("Response from port 8120!");
-    res.end();
-}
