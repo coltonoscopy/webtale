@@ -1,6 +1,8 @@
-var util = require("util"),
-    io = require("socket.io"),
-    Player = require("./Player").Player;
+var util = require("util");
+var io = require("socket.io")({
+    'transports': ['websocket']
+});
+var Player = require("./Player").Player;
 
 var socket,
     players;
@@ -8,13 +10,9 @@ var socket,
 function init() {
     players = [];
 
-    socket = io.listen(8888);
+    socket = io.listen(8120);
 
-    socket.configure(function() {
-        socket.set("transports", ["websocket"]);
-
-        socket.set("log level", 2);
-    });
+    console.log(socket);
 
     setEventHandlers();
 }
