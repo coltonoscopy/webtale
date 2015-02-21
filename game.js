@@ -7,8 +7,6 @@ var Player = require("./Player").Player;
 var socket,
     players;
 
-var app = connect();
-
 function init() {
     players = [];
 
