@@ -1,4 +1,3 @@
-var http = require("http");
 var util = require("util");
 var io = require("socket.io")({
     'transports': ['websocket']
@@ -7,6 +6,8 @@ var Player = require("./Player").Player;
 
 var socket,
     players;
+
+var app = connect();
 
 function init() {
     players = [];
