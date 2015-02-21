@@ -78,7 +78,7 @@
             game.world.setBounds(-500, -500, 1000, 1000);
 
             land = game.add.tileSprite(0, 0, 800, 600, 'earth');
-            land.fixedToCamera(true);
+            land.fixedToCamera = true;
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
