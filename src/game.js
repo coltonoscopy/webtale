@@ -8,7 +8,7 @@ var socket,
 function init() {
     players = [];
 
-    socket = io.listen(8120);
+    socket = io.listen(8888);
 
     socket.configure(function() {
         socket.set("transports", ["websocket"]);
