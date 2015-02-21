@@ -191,10 +191,10 @@
             land.tilePosition.y = -game.camera.y;
 
             if (game.input.activePointer.isDown) {
-                if (game.physics.distanceToPointer(player) >= 10) {
+                if (game.physics.arcade.distanceToPointer(player) >= 10) {
                     currentSpeed = 300;
 
-                    player.rotation = game.physics.angleToPointer(player);
+                    player.rotation = game.physics.arcade.angleToPointer(player);
                 }
             }
 
