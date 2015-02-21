@@ -87,6 +87,8 @@
             player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
             player.animations.add('stop', [3], 20, true);
 
+            game.physics.enable(player, Phaser.Physics.ARCADE);
+
             player.body.maxVelocity.setTo(400, 400);
             player.body.collideWorldBounds = true;
 
