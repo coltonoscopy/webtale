@@ -73,7 +73,7 @@
         var cursors;
 
         function create() {
-            socket = io.connect('http://coltonoscopy.com', {port: 8120, transports: ['websockets']});
+            socket = io.connect('http://coltonoscopy.com:8120', {transports: ['websockets']});
 
             game.world.setBounds(-500, -500, 1000, 1000);
 
