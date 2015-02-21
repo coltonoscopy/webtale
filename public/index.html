@@ -178,7 +178,7 @@
             }
 
             if (currentSpeed > 0) {
-                game.physics.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
+                game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
                 player.animations.play('move');
             }
             else {
