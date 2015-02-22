@@ -112,10 +112,12 @@
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
-            player = game.add.sprite(startX, startY, 'dude');
+            // player = game.add.sprite(startX, startY, 'dude');
+            player = game.add.sprite(startX, startY, 'tiles');
+            player.frame = 1985;
             player.anchor.setTo(0.5, 0.5);
-            player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
-            player.animations.add('stop', [3], 20, true);
+            // player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
+            // player.animations.add('stop', [3], 20, true);
 
             game.physics.enable(player, Phaser.Physics.ARCADE);
 
@@ -128,7 +130,7 @@
 
             minimap = game.add.renderTexture(210, 140, 'minimap');
             minimap.renderXY(layer, 0, 0, true);
-            minimapSprite = game.add.sprite(0, 0, minimap);
+            minimapSprite = game.add.sprite(1000, 510, minimap);
             minimapSprite.bringToTop();
 
             game.camera.follow(player);
@@ -214,13 +216,13 @@
                 }
             }
 
-            if (currentSpeed > 0) {
-                game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
-                player.animations.play('move');
-            }
-            else {
-                player.animations.play('stop');
-            }
+            // if (currentSpeed > 0) {
+            //     game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
+            //     player.animations.play('move');
+            // }
+            // else {
+            //     player.animations.play('stop');
+            // }
 
             layer.x = -game.camera.x;
             layer.y = -game.camera.y;
