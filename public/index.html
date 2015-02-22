@@ -128,7 +128,8 @@
 
             minimap = game.add.renderTexture(210, 140, 'minimap');
             minimap.renderXY(layer, 0, 0, true);
-            game.add.sprite(1000, 510, minimap);
+            minimapSprite = game.add.sprite(1000, 510, minimap);
+            minimapSprite.bringToTop();
 
             game.camera.follow(player);
             game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
