@@ -93,6 +93,7 @@
             layer.resizeWorld();
             layer.wrap = true;
             layer.fixedToCamera = true;
+            layer.scale = new Point(2, 2);
 
             map.setCollision(196, true, layer, true);
 
@@ -115,7 +116,6 @@
             game.camera.follow(player);
             game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
             game.camera.focusOnXY(0, 0);
-            game.camera.setSize(240, 160);
 
             cursors = game.input.keyboard.createCursorKeys();
 
