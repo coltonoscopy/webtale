@@ -61,6 +61,8 @@
             game.load.image('earth', 'assets/light_sand.png');
             game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
             game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
+            game.load.tilemap('mario', 'assets/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
+            game.load.image('tiles', 'assets/super_mario.png');
         }
 
         var socket;
@@ -79,8 +81,13 @@
 
             game.world.setBounds(-500, -500, 1000, 1000);
 
-            land = game.add.tileSprite(0, 0, 800, 600, 'earth');
-            land.fixedToCamera = true;
+            //land = game.add.tileSprite(0, 0, 800, 600, 'earth');
+            //land.fixedToCamera = true;
+            map = game.add.tilemap('mario');
+            map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
+            layer = map.createLayer('World1');
+            layer.resizeWorld();
+            layer.wrap = true;
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
