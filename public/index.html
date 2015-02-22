@@ -201,19 +201,21 @@
                 }
             }
 
-            if (cursors.left.isDown && !cursors.left.justPressed(50)) {
+            cursors.left.onDown.add(new function() {
                 player.x -= 64;
-            }
-            else if (cursors.right.isDown && !cursors.right.justPressed(50)) {
-                player.x += 64;
-            }
+            });
 
-            if (cursors.up.isDown && !cursors.up.justPressed(50)) {
+            cursors.right.onDown.add(new function() {
+                player.x += 64;
+            });
+
+            cursors.up.onDown.add(new function() {
                 player.y -= 64;
-            }
-            else if (cursors.down.isDown && !cursors.down.justPressed(50)) {
+            });
+
+            cursors.down.onDown.add(new function() {
                 player.y += 64;
-            }
+            });
 
             layer.x = -game.camera.x;
             layer.y = -game.camera.y;
