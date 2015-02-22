@@ -217,10 +217,10 @@
                 }
             }
 
-            // if (currentSpeed > 0) {
-            //     game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
-            //     player.animations.play('move');
-            // }
+            if (currentSpeed > 0) {
+                game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
+                // player.animations.play('move');
+            }
             // else {
             //     player.animations.play('stop');
             // }
