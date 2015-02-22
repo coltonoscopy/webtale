@@ -67,7 +67,7 @@
 
         var socket;
 
-        var land;
+        var map;
 
         var player;
 
@@ -194,8 +194,8 @@
                 player.animations.play('stop');
             }
 
-            land.tilePosition.x = -game.camera.x;
-            land.tilePosition.y = -game.camera.y;
+            map.tilePosition.x = -game.camera.x;
+            map.tilePosition.y = -game.camera.y;
 
             if (game.input.activePointer.isDown) {
                 if (game.physics.arcade.distanceToPointer(player) >= 10) {
