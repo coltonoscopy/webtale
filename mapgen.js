@@ -51,6 +51,13 @@ function generate() {
         numbers[i] = randomIntInc(896, 920);
     }
 
+    // make 100 random tiles in the array a specific type
+    for (i = 0; i < 100; i++)
+    {
+        var index = randomInt(0, height * width);
+        numbers[index] = 196;
+    }
+
     obj.tiles = numbers;
 
     jf.writeFile(file, obj, function(err) {

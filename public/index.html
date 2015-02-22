@@ -94,7 +94,7 @@
             layer.wrap = true;
             layer.fixedToCamera = true;
 
-            map.setCollisionBetween(896, 920, true, layer, true);
+            map.setCollision(196, true, layer, true);
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
@@ -171,7 +171,7 @@
 
         function update() {
             game.physics.arcade.collide(player, layer);
-            
+
             for (var i = 0; i < enemies.length; i++) {
                 if (enemies[i].alive) {
                     enemies[i].update();
