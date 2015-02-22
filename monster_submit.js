@@ -36,7 +36,7 @@ app.get('/monsters', function(req, res) {
         console.log(err);
 
         function addMonster(element, index, array) {
-            condensedJSON.add({"name": element.name, "id": element.id});
+            condensedJSON.push({"name": element.name, "id": element.id});
             console.log(element.name);
         }
 
