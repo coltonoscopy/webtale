@@ -68,6 +68,7 @@
         var socket;
 
         var map;
+        var layer;
 
         var player;
 
@@ -88,6 +89,7 @@
             layer = map.createLayer('World1');
             layer.resizeWorld();
             layer.wrap = true;
+            layer.fixedToCamera = true;
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
@@ -194,8 +196,8 @@
                 player.animations.play('stop');
             }
 
-            map.tilePosition.x = -game.camera.x;
-            map.tilePosition.y = -game.camera.y;
+            layer.x = -game.camera.x;
+            layer.y = -game.camera.y;
 
             if (game.input.activePointer.isDown) {
                 if (game.physics.arcade.distanceToPointer(player) >= 10) {
