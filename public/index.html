@@ -139,6 +139,22 @@
             game.camera.focusOnXY(0, 0);
 
             cursors = game.input.keyboard.createCursorKeys();
+            
+            cursors.left.onDown.add(function() {
+                player.x -= 64;
+            });
+
+            cursors.right.onDown.add(function() {
+                player.x += 64;
+            });
+
+            cursors.up.onDown.add(function() {
+                player.y -= 64;
+            });
+
+            cursors.down.onDown.add(function() {
+                player.y += 64;
+            });
 
             setEventHandlers();
         }
@@ -200,22 +216,6 @@
                     game.physics.arcade.collide(player, enemies[i].player);
                 }
             }
-
-            cursors.left.onDown.add(function() {
-                player.x -= 64;
-            });
-
-            cursors.right.onDown.add(function() {
-                player.x += 64;
-            });
-
-            cursors.up.onDown.add(function() {
-                player.y -= 64;
-            });
-
-            cursors.down.onDown.add(function() {
-                player.y += 64;
-            });
 
             layer.x = -game.camera.x;
             layer.y = -game.camera.y;
