@@ -58,7 +58,21 @@ app.get('/monsters', function(req, res) {
 });
 
 app.get('monsters/:id', function(req, res) {
+    var bestiaryJSON;
+    var file = '../bestiaries/bestiary1.json';
+    var monster;
 
+    function grabMonster(element, index, array) {
+        if (element.id == app.params.id)
+        {
+            monster = element;
+        }
+    }
+
+    jf.readFile(file, function(err, bestiaryJSON) {
+        bestiaryJSON.monsters.forEach(grabMonster);
+        res.send(monster);
+    });
 });
 
 app.post('monsters/new', function(req, res) {
