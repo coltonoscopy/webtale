@@ -45,7 +45,7 @@ app.get('/monsters', function(req, res) {
         var htmlGen = "<!DOCTYPE html><html><head></head><body><ul>";
 
         function addElement(element, index, array) {
-            htmlGen += '<li><a href=' + element.name + '</li>';
+            htmlGen += '<li><a href="coltonoscopy.com:3000/' + element.id + '>' + element.name + '</a></li>';
         }
 
         condensedJSON.entries.forEach(addElement);
