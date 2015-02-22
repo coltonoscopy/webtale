@@ -87,6 +87,8 @@
             dungeon: 983
         };
 
+        var minimap;
+
         function create() {
             socket = io('http://coltonoscopy.com:8120');
 
@@ -123,6 +125,10 @@
             enemies = [];
 
             player.bringToTop();
+
+            minimap = game.add.sprite(1000, 500, layer);
+            minimap.width = 210;
+            minimap.height = 140;
 
             game.camera.follow(player);
             game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
