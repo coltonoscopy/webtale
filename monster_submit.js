@@ -37,17 +37,31 @@ app.get('/monsters', function(req, res) {
 
         function addMonster(element, index, array) {
             condensedJSON.entries.push({"name": element.name, "id": element.id});
-            console.log(element.name);
         }
 
         bestiaryJSON.monsters.forEach(addMonster);
 
         // create HTML from the bestiary JSON
-        res.send(condensedJSON);
+        var htmlGen = "<!DOCTYPE html><html><head></head><body><ul>";
+
+        function addElement(element, index, array) {
+            htmlGen += '<li><a href=' + element.name + '</li>';
+        }
+
+        condensedJSON.entries.forEach(addElement);
+
+        htmlGen += "</ul></body></html>";
+
+        // res.send(condensedJSON);
+        res.send(htmlGen);
     });
 });
 
 app.get('monsters/:id', function(req, res) {
+
+});
+
+app.post('monsters/new', function(req, res) {
 
 });
 
