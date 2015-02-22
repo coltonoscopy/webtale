@@ -5,18 +5,18 @@ var jf = require('jsonfile');
 var path = require('path');
 
 function generate() {
-    var file = 'super_mario.json';
+    var file = 'level.json';
     var obj = {};
-    var height = randomInt(50, 60);
-    var width = randomInt(50, 60);
+    var height = randomInt(200, 210);
+    var width = randomInt(200, 210);
     var numbers = new Array(height * width);
 
     obj.height = height;
     obj.width = width;
     obj.orientation = 'orthogonal';
-    obj.properties = {mapProp: 123};
-    obj.tileheight = 16;
-    obj.tilewidth = 16;
+    obj.properties = {};
+    obj.tileheight = 32;
+    obj.tilewidth = 32;
     obj.layers = [];
     obj.layers[0] = {
         data: numbers,
@@ -33,22 +33,22 @@ function generate() {
     obj.tilesets = [
         {
             firstgid: 1,
-            image: 'super_mario.png',
-            imageheight: 64,
-            imagewidth: 176,
+            image: 'tiles1.png',
+            imageheight: 1536,
+            imagewidth: 2048,
             margin: 0,
-            name: 'SuperMarioBros-World1-1',
+            name: 'tiles1',
             properties: {},
             spacing: 0,
-            tileheight: 16,
-            tileproperties: {10: {coin: true}},
-            tilewidth: 16
+            tileheight: 32,
+            tileproperties: {},
+            tilewidth: 32
         }
     ];
     obj.version = 1;
 
     for (var i = 0; i < numbers.length; i++) {
-        numbers[i] = randomIntInc(1, 11);
+        numbers[i] = randomIntInc(1, 3072);
     }
 
     obj.tiles = numbers;
