@@ -202,39 +202,21 @@
             }
 
             if (cursors.left.isDown) {
-                player.angle -= 4;
+                player.x -= 32;
             }
             else if (cursors.right.isDown) {
-                player.angle += 4;
+                player.x += 32;
             }
 
             if (cursors.up.isDown) {
-                currentSpeed = 300;
+                player.y -= 32;
             }
-            else {
-                if (currentSpeed > 0) {
-                    currentSpeed -= 4;
-                }
+            else if (cursors.down.isDown) {
+                player.y += 32;
             }
-
-            if (currentSpeed > 0) {
-                game.physics.arcade.velocityFromRotation(player.rotation, currentSpeed, player.body.velocity);
-                // player.animations.play('move');
-            }
-            // else {
-            //     player.animations.play('stop');
-            // }
 
             layer.x = -game.camera.x;
             layer.y = -game.camera.y;
-
-            if (game.input.activePointer.isDown) {
-                if (game.physics.arcade.distanceToPointer(player) >= 10) {
-                    currentSpeed = 300;
-
-                    player.rotation = game.physics.arcade.angleToPointer(player);
-                }
-            }
 
             socket.emit("move player", {x: player.x, y: player.y});
         }
