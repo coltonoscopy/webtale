@@ -34,7 +34,15 @@ app.get('/monsters', function(req, res) {
 
     jf.readFile(file, function(err, bestiaryJSON) {
         console.log(err);
-        res.send(bestiaryJSON);
+
+        function addMonster(element, index, array) {
+            condensedJSON.add({"name": element.name, "id": element.id});
+        }
+
+        bestiaryJSON.monsters.forEach(addMonster);
+
+        // create HTML from the bestiary JSON
+        res.send(condensedJSON);
     });
 });
 
