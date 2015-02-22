@@ -63,7 +63,7 @@ app.get('monsters/:id', function(req, res) {
     var monster;
 
     function grabMonster(element, index, array) {
-        if (element.id == app.params.id)
+        if (element.id == req.params.id)
         {
             monster = element;
         }
