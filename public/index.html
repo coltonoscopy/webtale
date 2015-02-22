@@ -105,7 +105,7 @@
             layer = map.createLayer('World1');
             layer.resizeWorld();
             layer.wrap = true;
-            layer.fixedToCamera = true;
+            layer.fixedToCamera = false;
             layer.smoothed = false;
             layer.setScale(2);
 
@@ -139,7 +139,7 @@
             game.camera.focusOnXY(0, 0);
 
             cursors = game.input.keyboard.createCursorKeys();
-            
+
             cursors.left.onDown.add(function() {
                 player.x -= 64;
             });
