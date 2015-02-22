@@ -201,18 +201,18 @@
                 }
             }
 
-            if (cursors.left.isDown) {
-                player.x -= 32;
+            if (cursors.left.isDown && !cursors.left.justPressed(50)) {
+                player.x -= 64;
             }
-            else if (cursors.right.isDown) {
-                player.x += 32;
+            else if (cursors.right.isDown && !cursors.right.justPressed(50)) {
+                player.x += 64;
             }
 
-            if (cursors.up.isDown) {
-                player.y -= 32;
+            if (cursors.up.isDown && !cursors.up.justPressed(50)) {
+                player.y -= 64;
             }
-            else if (cursors.down.isDown) {
-                player.y += 32;
+            else if (cursors.down.isDown && !cursors.down.justPressed(50)) {
+                player.y += 64;
             }
 
             layer.x = -game.camera.x;
