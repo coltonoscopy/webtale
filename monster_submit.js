@@ -61,6 +61,7 @@ app.get('monsters/:id', function(req, res) {
     var bestiaryJSON;
     var file = '../bestiaries/bestiary1.json';
     var monster;
+    console.log(req.params.id);
 
     function grabMonster(element, index, array) {
         if (element.id == req.params.id)
