@@ -37,6 +37,7 @@ app.get('/monsters', function(req, res) {
 
         function addMonster(element, index, array) {
             condensedJSON.add({"name": element.name, "id": element.id});
+            console.log(element.name);
         }
 
         bestiaryJSON.monsters.forEach(addMonster);
