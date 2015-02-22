@@ -105,7 +105,7 @@
             layer = map.createLayer('World1');
             layer.resizeWorld();
             layer.wrap = true;
-            layer.fixedToCamera = false;
+            layer.fixedToCamera = true;
             layer.smoothed = false;
             layer.setScale(2);
 
@@ -131,7 +131,8 @@
 
             minimap = game.add.renderTexture(210, 140, 'minimap');
             minimap.renderXY(layer, 0, 0, true);
-            minimapSprite = game.add.sprite(1000, 510, minimap);
+            minimapSprite = game.add.sprite(1000, 510, 'icons');
+            minimapSprite.frame = 65;
             minimapSprite.bringToTop();
 
             game.camera.follow(player);
