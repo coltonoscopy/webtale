@@ -133,6 +133,7 @@
             minimap.renderXY(layer, 0, 0, true);
             minimapSprite = game.add.sprite(1000, 510, 'icons');
             minimapSprite.frame = 65;
+            minimapSprite.fixedToCamera = true;
             minimapSprite.bringToTop();
 
             game.camera.follow(player);
