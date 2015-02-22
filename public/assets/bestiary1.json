@@ -1,0 +1,165 @@
+{
+    "monsters": [
+        {
+            "name": "Ankheg",
+            "size": "large",
+            "image": "ankheg",
+            "level": 3,
+            "exp": 300,
+            "resistances": {
+                "acid": 5
+            },
+            "movement": {
+                "normal": 8,
+                "burrow": 4
+            },
+            "armor": 17,
+            "attacks": [
+                {
+                    "name": "Claw",
+                    "id": "claw",
+                    "type": "melee",
+                    "duration": "standard",
+                    "damage": 13,
+                    "damageType": "normal"
+                },
+                {
+                    "name": "Mandible Grab",
+                    "id": "mandible_grab",
+                    "type": "melee",
+                    "duration": "standard",
+                    "damage": 13,
+                    "damageType": "normal",
+                    "effects": [
+                        {
+                            "type": "grab"
+                        }
+                    ],
+                    "requires": {
+                        "hasGrab": false
+                    }
+                },
+                {
+                    "name": "Gnaw and Scuttle",
+                    "id": "gnaw_and_scuttle",
+                    "type": "melee",
+                    "duration": "standard",
+                    "damage": 10,
+                    "damageType": "normal",
+                    "dot": {
+                        "damage": 5,
+                        "damageType": "acid",
+                        "duration": 3
+                    },
+                    "effects": [
+                        {
+                            "type": "shift",
+                            "distance": 2
+                        }
+                        {
+                            "type": "pull"
+                        }
+                    ]
+                },
+                {
+                    "name": "Acid Spray",
+                    "id": "acid_spray",
+                    "type": "close",
+                    "blast": 3,
+                    "duration": "minor",
+                    "damage": 8,
+                    "extraDamage": {
+                        "damage": 5,
+                        "damageType": "acid"
+                    },
+                    "dot": {
+                        "damage": 5,
+                        "damageType": "acid",
+                        "duration": 3
+                    },
+                    "effects": [
+                        {
+                            "type": "slow",
+                            "duration": 3
+                        }
+                    ],
+                    "recharge": {
+                        "bloody": true
+                    }
+                }
+            ]        
+        }, {
+            "name": "Behir Stormsteed",
+            "size": "huge",
+            "image": "behir_stormsteed",
+            "level": 24,
+            "exp": 6050,
+            "resistances": {
+                "lightning": 15
+            },
+            "movement": {
+                "normal": 8,
+                "fly": 8
+            },
+            "armor": 40,
+            "attacks": [
+                {
+                    "name": "Bite",
+                    "id": "bite",
+                    "type": "normal",
+                    "reach": 2,
+                    "duration": "standard",
+                    "damage": 17,
+                    "extraDamage": {
+                        "damage": 8,
+                        "damageType": "lightning"
+                    },
+                    "chainDamage": {
+                        "damage": 5,
+                        "damageType": "lightning",
+                        "reach": 3
+                    }
+                },
+                {
+                    "name": "Lightning Breath",
+                    "id": "lightning_breath",
+                    "type": "close",
+                    "burst": 3,
+                    "burstMax": 2,
+                    "duration": "standard",
+                    "damage": 19,
+                    "damageType": "lightning",
+                    "effects": [
+                        {
+                            "type": "slow",
+                            "duration": 1
+                        }
+                    ],
+                    "recharge": {
+                        "roll": 50
+                    }
+                },
+                {
+                    "name": "Ride the Lightning",
+                    "id": "ride_the_lightning",
+                    "type": "mount",
+                    "effects": [
+                        {
+                            "type": "reuse",
+                            "abilities": ["bite", "lightning_breath"],
+                            "duration": "minor"
+                        },
+                        {
+                            "type": "buff",
+                            "category": {
+                                "type": "attack",
+                                "type": "lightning"
+                            },
+                            "duration": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
