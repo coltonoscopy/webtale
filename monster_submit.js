@@ -3,6 +3,7 @@
  * on the server.
  */
 var express = require('express');
+var jf = require('jsonfile');
 var forms = require('forms');
 var fields = forms.fields;
 var validators = forms.validators;
@@ -21,6 +22,24 @@ var monsterForm = forms.create({
 
 app.get('/', function(req, res) {
     res.send(monsterForm.toHTML());
+});
+
+app.get('/monsters', function(req, res) {
+    var condensedJSON = {
+
+    };
+
+    var bestiaryJSON;
+    var file = '../bestiaries/bestiary1.json';
+
+    jf.readFile(file, function(err, bestiaryJSON) {
+        console.log(err);
+        res.send(bestiaryJSON);
+    });
+});
+
+app.get('monsters/:id', function(req, res) {
+
 });
 
 app.listen(3000);
