@@ -5,7 +5,7 @@ var jf = require('jsonfile');
 var path = require('path');
 
 function generate() {
-    var file = 'level.json';
+    var file = 'public/assets/level.json';
     var obj = {};
     var height = randomInt(200, 210);
     var width = randomInt(200, 210);
@@ -48,7 +48,7 @@ function generate() {
     obj.version = 1;
 
     for (var i = 0; i < numbers.length; i++) {
-        numbers[i] = randomIntInc(1, 3072);
+        numbers[i] = randomIntInc(896, 920);
     }
 
     obj.tiles = numbers;
