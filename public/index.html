@@ -61,6 +61,7 @@
             game.load.image('earth', 'assets/light_sand.png');
             game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
             game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
+            game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
             game.load.tilemap('level', 'assets/world.json', null, Phaser.Tilemap.TILED_JSON);
             game.load.image('tiles', 'assets/tiles1.png');
         }
@@ -113,7 +114,7 @@
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
             // player = game.add.sprite(startX, startY, 'dude');
-            player = game.add.sprite(startX, startY, 'tiles');
+            player = game.add.sprite(startX, startY, 'icons');
             player.frame = 1985;
             player.anchor.setTo(0.5, 0.5);
             // player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
