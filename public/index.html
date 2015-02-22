@@ -77,6 +77,16 @@
         var currentSpeed = 0;
         var cursors;
 
+        var tileTypes = {
+            grass: 961,
+            ocean: 1226,
+            desert: 848,
+            forest: 878,
+            mountain: 872,
+            river: 1254,
+            dungeon: 983
+        };
+
         function create() {
             socket = io('http://coltonoscopy.com:8120');
 
@@ -96,7 +106,7 @@
             layer.smoothed = false;
             layer.setScale(2);
 
-            map.setCollision(196, true, layer, true);
+            map.setCollision(tileTypes.grass, true, layer, true);
 
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
