@@ -27,6 +27,8 @@ function onSocketConnection(client) {
     client.on("new player", onNewPlayer);
 
     client.on("move player", onMovePlayer);
+
+    client.on("new map", onNewMap);
 }
 
 function onClientDisconnect() {
@@ -72,6 +74,10 @@ function onMovePlayer(data) {
     movePlayer.setY(data.y);
 
     this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY()});
+}
+
+function onNewMap() {
+    
 }
 
 function playerById(id) {
