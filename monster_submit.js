@@ -30,7 +30,7 @@ app.get('/monsters', function(req, res) {
     };
 
     var bestiaryJSON;
-    var file = '../bestiaries/bestiary2.json';
+    var file = '../bestiaries/bestiary1.json';
 
     jf.readFile(file, function(err, bestiaryJSON) {
         console.log(err);
