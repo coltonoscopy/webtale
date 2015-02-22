@@ -94,6 +94,8 @@
             layer.wrap = true;
             layer.fixedToCamera = true;
 
+            map.setCollisionBetween(896, 920, true, layer, true);
+
             var startX = Math.round(Math.random()*(1000)-500),
                 startY = Math.round(Math.random()*(1000)-500);
             player = game.add.sprite(startX, startY, 'dude');
