@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 
 app.get('/monsters', function(req, res) {
     var condensedJSON = {
-
+        "entries": []
     };
 
     var bestiaryJSON;
@@ -36,7 +36,7 @@ app.get('/monsters', function(req, res) {
         console.log(err);
 
         function addMonster(element, index, array) {
-            condensedJSON.push({"name": element.name, "id": element.id});
+            condensedJSON.entries.push({"name": element.name, "id": element.id});
             console.log(element.name);
         }
 
