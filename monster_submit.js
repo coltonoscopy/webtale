@@ -57,7 +57,7 @@ app.get('/monsters', function(req, res) {
     });
 });
 
-app.get('monsters/:id', function(req, res) {
+app.get('/monsters/:id', function(req, res) {
     var bestiaryJSON;
     var file = '../bestiaries/bestiary1.json';
     var monster;
