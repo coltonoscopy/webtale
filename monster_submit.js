@@ -1,6 +1,5 @@
 /**
- * Displays a form for the user to enter a Monster. Takes in the Monster and creates a new json file for it
- * on the server.
+ * Series of pages for retrieving and POSTing monsters.
  */
 var express = require('express');
 var jf = require('jsonfile');
@@ -10,6 +9,7 @@ var validators = forms.validators;
 
 var app = express();
 
+// the monster building form we will use on our homepage
 var monsterForm = forms.create({
     username: fields.string({required: true}),
     password: fields.password({required: validators.required('You need a password.')}),
