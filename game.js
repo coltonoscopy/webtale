@@ -5,7 +5,8 @@ var io = require("socket.io")({
 var Player = require("./Player").Player;
 
 var socket,
-    players;
+    players,
+    world;
 
 function init() {
     players = [];
