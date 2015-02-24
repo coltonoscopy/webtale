@@ -148,3 +148,5 @@ function generateTerrainMap(mapDimension, unitSize, roughness) {
         return value;
     }
 }
+
+exports.generateTerrainMap = generateTerrainMap;

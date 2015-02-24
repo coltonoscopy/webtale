@@ -1,5 +1,5 @@
-HeightMapGenerator = require('./canvasTerrain.js');
+HeightMapGenerator = require('./canvasTerrain.js').generateTerrainMap;
 
-var arr2D = HeightMapGenerator.generateTerrainMap(50, 1, 1);
+var arr2D = HeightMapGenerator(50, 1, 1);
 
 console.log(arr2D);
