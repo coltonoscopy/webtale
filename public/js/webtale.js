@@ -120,6 +120,7 @@ function create() {
         var x = i % map.height;
         var y = i / map.height;
 
+        console.log("X: " + x + ", Y: " + y);
         console.log(map.getTile(x, y, layer).index);
 
         // if (map.getTile(x, y, layer).index == tileTypes.grass)
