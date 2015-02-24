@@ -122,10 +122,10 @@ function create() {
 
         console.log(map.getTile(x, y, layer).index);
 
-        if (map.getTile(x, y, layer).index == tileTypes.grass)
-            bmd.setPixel(x, y, 0x00, 0xFF, 0x00, 0xFF);
-        if (map.getTile(x, y, layer).index == tileTypes.ocean)
-            bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
+        // if (map.getTile(x, y, layer).index == tileTypes.grass)
+        //     bmd.setPixel(x, y, 0x00, 0xFF, 0x00, 0xFF);
+        // if (map.getTile(x, y, layer).index == tileTypes.ocean)
+        //     bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
     }
 
     bmd.addToWorld();
