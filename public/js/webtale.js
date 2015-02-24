@@ -115,7 +115,7 @@ function create() {
     bmd = game.add.bitmapData(map.width, map.height);
 
     // for each tile in our map, set the pixel of our bmd to the right color
-    for (var i = 0; i < map.width * map.height; i++)
+    for (var i = 0; i < 400; i++)
     {
         var x = i % map.height;
         var y = Math.floor(i / map.height);
