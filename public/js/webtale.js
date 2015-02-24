@@ -129,9 +129,12 @@ function create() {
             bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
     }
 
-    // bmdSprite = game.add.sprite(1000, 510, 'minimap');
-    // bmdSprite.fixedToCamera = true;
-    // bmdSprite.bringToTop();
+    bmdTex = game.add.renderTexture(200, 140, 'minimap');
+    bmdTex.renderXY(200, 140, bmd);
+    bmdSprite = game.add.sprite(1000, 510, 'minimap');
+    bmd.add(bmdSprite);
+    bmdSprite.fixedToCamera = true;
+    bmdSprite.bringToTop();
 
     game.camera.follow(player);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
