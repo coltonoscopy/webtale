@@ -113,8 +113,7 @@ function create() {
     player.bringToTop();
 
     // create new BitmapData the size of our tile map
-    // bmd = game.add.bitmapData('minimap', map.width, map.height);
-    bmd = game.add.bitmapData(map.width, map.height);
+    bmd = game.add.bitmapData(map.width, map.height, 'minimap', true);
 
     // for each tile in our map, set the pixel of our bmd to the right color
     for (var i = 0; i < 400; i++)
@@ -125,15 +124,12 @@ function create() {
         console.log("X: " + x + ", Y: " + y);
 
         if (map.getTile(x, y, layer).index == tileTypes.grass)
-            bmd.setPixel(x, y, 0x00, 0xFF, 0x00, 0xFF);
+            bmd.setPixel(x, y, 0x00, 0xFF, 0xFF, 0xFF);
         if (map.getTile(x, y, layer).index == tileTypes.ocean)
-            bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
+            bmd.setPixel(x, y, 0xFF, 0x00, 0xFF, 0xFF);
     }
 
-    bmdTex = game.add.renderTexture(200, 140, 'minimap');
-    bmdTex.renderXY(200, 140, bmd);
     var bmdSprite = game.add.sprite(1000, 510, 'minimap');
-    bmd.add(bmdSprite);
     bmdSprite.fixedToCamera = true;
     bmdSprite.bringToTop();
 
