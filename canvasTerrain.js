@@ -77,8 +77,8 @@ function generateTerrainMap(mapDimension, unitSize, roughness) {
         if (newDimension > unitSize){
             for(i = newDimension; i <= mapDimension; i += newDimension){
                 for(j = newDimension; j <= mapDimension; j += newDimension){
-                    x = i - (newDimension / 2);
-                    y = j - (newDimension / 2);
+                    x = Math.floor(i - (newDimension / 2));
+                    y = Math.floor(j - (newDimension / 2));
 
                     topLeft = map[i - newDimension][j - newDimension];
                     topRight = map[i][j - newDimension];
