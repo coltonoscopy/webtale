@@ -113,26 +113,26 @@ function create() {
     player.bringToTop();
 
     // create new BitmapData the size of our tile map
-    bmd = game.add.bitmapData(map.width, map.height);
+    // bmd = game.add.bitmapData(map.width, map.height);
 
-    // for each tile in our map, set the pixel of our bmd to the right color
-    for (var i = 0; i < map.width * map.height; i++)
-    {
-        var x = i % map.height;
-        var y = Math.floor(i / map.height);
+    // // for each tile in our map, set the pixel of our bmd to the right color
+    // for (var i = 0; i < map.width * map.height; i++)
+    // {
+    //     var x = i % map.height;
+    //     var y = Math.floor(i / map.height);
 
-        console.log("X: " + x + ", Y: " + y);
+    //     console.log("X: " + x + ", Y: " + y);
 
-        if (map.getTile(x, y, layer).index == tileTypes.grass)
-            bmd.setPixel(x, y, 0x00, 0xFF, 0xFF, 0xFF, false);
-        if (map.getTile(x, y, layer).index == tileTypes.ocean)
-            bmd.setPixel(x, y, 0xFF, 0x00, 0xFF, 0xFF, false);
-    }
+    //     if (map.getTile(x, y, layer).index == tileTypes.grass)
+    //         bmd.setPixel(x, y, 0x00, 0xFF, 0xFF, 0xFF, false);
+    //     if (map.getTile(x, y, layer).index == tileTypes.ocean)
+    //         bmd.setPixel(x, y, 0xFF, 0x00, 0xFF, 0xFF, false);
+    // }
 
-    bmd.update();
-    var bmdSprite = game.add.sprite(1000, 510, bmd);
-    bmdSprite.fixedToCamera = true;
-    bmdSprite.bringToTop();
+    // bmd.update();
+    // var bmdSprite = game.add.sprite(1000, 510, bmd);
+    // bmdSprite.fixedToCamera = true;
+    // bmdSprite.bringToTop();
 
     game.camera.follow(player);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
