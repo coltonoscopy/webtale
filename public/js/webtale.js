@@ -112,7 +112,8 @@ function create() {
     player.bringToTop();
 
     // create new BitmapData the size of our tile map
-    bmd = game.add.bitmapData('minimap', map.width, map.height);
+    // bmd = game.add.bitmapData('minimap', map.width, map.height);
+    bmd = game.add.bitmapData(map.width, map.height);
 
     // for each tile in our map, set the pixel of our bmd to the right color
     for (var i = 0; i < 400; i++)
