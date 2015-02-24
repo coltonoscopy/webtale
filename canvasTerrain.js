@@ -111,7 +111,7 @@ function generateTerrainMap(mapDimension, unitSize, roughness) {
 
                     //Right
                     if(i + (newDimension / 2) < mapDimension){
-                        map[i][y] = (topRight + bottomRight + center + map[i + (newDimension / 2)][y]) / 4+ displace(dimension);
+                        map[i][y] = (topRight + bottomRight + center + map[Math.floor(i + (newDimension / 2))][y]) / 4+ displace(dimension);
                     }else{
                         map[i][y] = (topRight + bottomRight + center) / 3+ displace(dimension);
                     }
