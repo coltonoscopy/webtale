@@ -55,6 +55,7 @@ var layer;
 var player;
 
 var enemies;
+var bmd;
 
 var currentSpeed = 0;
 var cursors;
@@ -110,11 +111,24 @@ function create() {
 
     player.bringToTop();
 
-    minimap = game.add.renderTexture(210, 140, 'minimap');
-    minimap.renderXY(layer, 0, 0, true);
-    minimapSprite = game.add.sprite(1000, 510, minimap);
-    minimapSprite.fixedToCamera = true;
-    minimapSprite.bringToTop();
+    // create new BitmapData the size of our tile map
+    bmd = game.add.bitmapData(map.width, map.height);
+
+    // for each tile in our map, set the pixel of our bmd to the right color
+    for (var i = 0; i < map.width * map.height; i++)
+    {
+        var x = i % map.height;
+        var y = i / map.height;
+
+        if (map.getTile(x, y, layer).index == tileTypes['grass'])
+            bmd.setPixel(x, y, 0x00, 0xFF, 0x00, 0xFF);
+        if (map.getTile(x, y, layer).index == tileTypes['ocean'])
+            bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
+    }
+
+    bmd.addToWorld();
+    bmd.fixedToCamera = true;
+    bmd.bringToTop();
 
     game.camera.follow(player);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
