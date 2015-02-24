@@ -112,7 +112,7 @@ function create() {
     player.bringToTop();
 
     // create new BitmapData the size of our tile map
-    bmd = game.add.bitmapData(map.width, map.height);
+    bmd = game.add.bitmapData('minimap', map.width, map.height);
 
     // for each tile in our map, set the pixel of our bmd to the right color
     for (var i = 0; i < 400; i++)
@@ -128,9 +128,9 @@ function create() {
             bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
     }
 
-    bmd.addToWorld();
-    bmd.fixedToCamera = true;
-    bmd.bringToTop();
+    bmdSprite = game.add.sprite(1000, 510, bmd);
+    bmdSprite.fixedToCamera = true;
+    bmdSprite.bringToTop();
 
     game.camera.follow(player);
     game.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
