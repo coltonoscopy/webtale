@@ -120,7 +120,7 @@ function generateTerrainMap(mapDimension, unitSize, roughness) {
 
                     // Left
                     if(i - (newDimension * 2) + (newDimension / 2) > 0){
-                        map[i - newDimension][y] = (topLeft + bottomLeft + center + map[i - dimension + (newDimension / 2)][y]) / 4 + displace(dimension);
+                        map[i - newDimension][y] = (topLeft + bottomLeft + center + map[Math.floor(i - dimension + (newDimension / 2))][y]) / 4 + displace(dimension);
                     }else{
                         map[i - newDimension][y] = (topLeft + bottomLeft + center) / 3+ displace(dimension);
                     }
