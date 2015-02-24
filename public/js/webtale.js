@@ -124,11 +124,12 @@ function create() {
         console.log("X: " + x + ", Y: " + y);
 
         if (map.getTile(x, y, layer).index == tileTypes.grass)
-            bmd.setPixel(x, y, 0x00, 0xFF, 0xFF, 0xFF);
+            bmd.setPixel(x, y, 0x00, 0xFF, 0xFF, 0xFF, false);
         if (map.getTile(x, y, layer).index == tileTypes.ocean)
-            bmd.setPixel(x, y, 0xFF, 0x00, 0xFF, 0xFF);
+            bmd.setPixel(x, y, 0xFF, 0x00, 0xFF, 0xFF, false);
     }
 
+    bmd.update();
     var bmdSprite = game.add.sprite(1000, 510, bmd);
     bmdSprite.fixedToCamera = true;
     bmdSprite.bringToTop();
