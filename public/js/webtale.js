@@ -120,9 +120,9 @@ function create() {
         var x = i % map.height;
         var y = i / map.height;
 
-        if (map.getTile(x, y, layer).index == tileTypes['grass'])
+        if (map.getTile(x, y, layer).index == tileTypes.grass)
             bmd.setPixel(x, y, 0x00, 0xFF, 0x00, 0xFF);
-        if (map.getTile(x, y, layer).index == tileTypes['ocean'])
+        if (map.getTile(x, y, layer).index == tileTypes.ocean)
             bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
     }
 
