@@ -1,7 +1,8 @@
 var Player = function(startX, startY) {
     var x = startX,
         y = startY,
-        id;
+        id, playerClass, health, mana,
+        strength, cons, dex, intel, wisdom, charisma, race;
 
     var getX = function() {
         return x;
@@ -24,7 +25,17 @@ var Player = function(startX, startY) {
         getY: getY,
         setX: setX,
         setY: setY,
-        id: id
+        id: id,
+        playerClass: playerClass,
+        health: health,
+        mana: mana,
+        strength: strength,
+        cons: cons,
+        dex: dex,
+        intel: intel,
+        wisdom: wisdom,
+        charisma: charisma,
+        race: race
     };
 };
 
