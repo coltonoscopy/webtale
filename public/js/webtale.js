@@ -128,7 +128,7 @@ function create() {
             bmd.setPixel(x, y, 0x00, 0x00, 0xFF, 0xFF);
     }
 
-    bmdSprite = game.add.sprite(1000, 510, bmd);
+    bmdSprite = game.add.sprite(1000, 510, 'minimap');
     bmdSprite.fixedToCamera = true;
     bmdSprite.bringToTop();
 
