@@ -3,6 +3,7 @@ var io = require("socket.io")({
     'transports': ['websocket']
 });
 var Player = require("./Player").Player;
+var WorldGenerator = require('./WorldGenerator.js').WorldGenerator;
 
 var socket,
     players,

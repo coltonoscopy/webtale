@@ -73,6 +73,10 @@ var tileTypes = {
 
 var minimap;
 
+// game mode represents whether we're in exploration or combat mode
+// 0 = exploration, 1 = combat
+var gamemode = 0;
+
 function create() {
     socket = io('http://coltonoscopy.com:8120');
 
@@ -81,8 +85,6 @@ function create() {
     game.scale.refresh();
     game.world.setBounds(-500, -500, 1000, 1000);
 
-    //land = game.add.tileSprite(0, 0, 800, 600, 'earth');
-    //land.fixedToCamera = true;
     map = game.add.tilemap('level');
     map.addTilesetImage('tiles1', 'tiles');
     layer = map.createLayer('World1');
@@ -96,7 +98,7 @@ function create() {
 
     var startX = Math.round(Math.random()*(1000)-500),
         startY = Math.round(Math.random()*(1000)-500);
-    // player = game.add.sprite(startX, startY, 'dude');
+
     player = game.add.sprite(startX, startY, 'icons');
     player.frame = 1985;
     player.anchor.setTo(0.5, 0.5);
@@ -112,6 +114,9 @@ function create() {
 
     player.bringToTop();
 
+    //
+    // TODO: fix this section of the code to show minimap
+    //
     // create new BitmapData the size of our tile map
     // bmd = game.add.bitmapData(map.width, map.height);
 
@@ -207,20 +212,30 @@ function onRemovePlayer(data) {
     enemies.splice(enemies.indexOf(removePlayer), 1);
 }
 
+/**
+ * Update our game world, operating differently depending on whether we're in Exploration or
+ * Combat mode as well.
+ */
 function update() {
-    game.physics.arcade.collide(player, layer);
+    // if we're in exploration mode...
+    if (gamemode === 0) {
+        game.physics.arcade.collide(player, layer);
 
-    for (var i = 0; i < enemies.length; i++) {
-        if (enemies[i].alive) {
-            enemies[i].update();
-            game.physics.arcade.collide(player, enemies[i].player);
+        for (var i = 0; i < enemies.length; i++) {
+            if (enemies[i].alive) {
+                enemies[i].update();
+                game.physics.arcade.collide(player, enemies[i].player);
+            }
         }
+
+        layer.x = -game.camera.x;
+        layer.y = -game.camera.y;
+
+        socket.emit("move player", {x: player.x, y: player.y});
     }
+    else {
 
-    layer.x = -game.camera.x;
-    layer.y = -game.camera.y;
-
-    socket.emit("move player", {x: player.x, y: player.y});
+    }
 }
 
 function render() {
