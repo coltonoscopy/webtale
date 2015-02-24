@@ -56,6 +56,7 @@ var player;
 
 var enemies;
 var bmd;
+var bmdTex;
 
 var currentSpeed = 0;
 var cursors;
@@ -131,7 +132,7 @@ function create() {
 
     bmdTex = game.add.renderTexture(200, 140, 'minimap');
     bmdTex.renderXY(200, 140, bmd);
-    bmdSprite = game.add.sprite(1000, 510, 'minimap');
+    var bmdSprite = game.add.sprite(1000, 510, 'minimap');
     bmd.add(bmdSprite);
     bmdSprite.fixedToCamera = true;
     bmdSprite.bringToTop();
