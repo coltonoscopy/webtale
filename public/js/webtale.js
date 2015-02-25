@@ -101,13 +101,6 @@ function create() {
     layer.smoothed = false;
     layer.setScale(2);
 
-    map.setCollision(tileTypes.ocean, true, layer, true);
-    timer = game.time.create(false);
-    while (map === undefined)
-        timer.pause(2000);
-
-    // map = game.add.tilemap('level');
-
     var startX = Math.round(Math.random()*(1000)-500),
         startY = Math.round(Math.random()*(1000)-500);
 
@@ -121,6 +114,8 @@ function create() {
 
     player.body.maxVelocity.setTo(400, 400);
     player.body.collideWorldBounds = true;
+
+    map.setCollision(tileTypes.ocean, true, layer, true);
 
     enemies = [];
 
