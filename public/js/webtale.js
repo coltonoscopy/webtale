@@ -187,20 +187,6 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            if (element === map.getTileWorldXY(player.x, player.y + 32).index)
-            {
-                move = false;
-            }
-        });
-
-        if (move)
-            player.y += 32;
-    });
-
-    cursors.down.onDown.add(function() {
-        var move = true;
-
-        collisionTiles.forEach(function(element, index, array) {
             if (element === map.getTileWorldXY(player.x, player.y - 32).index)
             {
                 move = false;
@@ -209,6 +195,20 @@ function create() {
 
         if (move)
             player.y -= 32;
+    });
+
+    cursors.down.onDown.add(function() {
+        var move = true;
+
+        collisionTiles.forEach(function(element, index, array) {
+            if (element === map.getTileWorldXY(player.x, player.y + 32).index)
+            {
+                move = false;
+            }
+        });
+
+        if (move)
+            player.y += 32;
     });
 
     setEventHandlers();
