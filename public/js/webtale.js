@@ -101,7 +101,7 @@ function create() {
     layer.smoothed = false;
     layer.setScale(2);
 
-        map.setCollision(tileTypes.grass, true, layer, true);
+    map.setCollision(tileTypes.ocean, true, layer, true);
     timer = game.time.create(false);
     while (map === undefined)
         timer.pause(2000);

@@ -36,19 +36,19 @@ function WorldGenerator() {
         var size;
 
         // fill our array with Perlin noise
-        numbers.forEach(function(element, array, index) {
-            var x = element % height;
-            var y = Math.floor(element / height);
+        for (var i = 0; i < height * width; i++) {
+            var x = i % height;
+            var y = Math.floor(i / height);
 
             x /= width; y /= height;
             size = 10;
 
             var n = PerlinNoise.noise(size * x, size * y, 0.8);
             if (n < 0.5)
-                numbers[element] = tileMappings.ocean;
+                numbers[i] = tileMappings.ocean;
             else
-                numbers[element] = tileMappings.grass;
-        });
+                numbers[i] = tileMappings.grass;
+        }
 
         obj.height = height;
         obj.width = width;
