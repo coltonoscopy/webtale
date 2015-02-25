@@ -166,8 +166,8 @@ function create() {
         });
 
         if (move)
-            game.add.tween(player).from({x: player.x}, player.x + 32, Phaser.Easing.Bounce.Out, true);
-            // player.x -= 32;
+            player.x -= 32;
+            game.add.tween(player).from({x: player.x + 32}, 1000, Phaser.Easing.Bounce.Out, true);
     });
 
     cursors.right.onDown.add(function() {
