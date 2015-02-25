@@ -185,6 +185,7 @@ function create() {
 
         collisionTiles.forEach(function(element, index, array) {
             var tile = map.getTileWorldXY(player.x + 32, player.y);
+            console.log(tile);
             if (tile !== null)
             {
                 if (element === tile.index)
