@@ -1,8 +1,8 @@
 /**
  * Generates a world map for WebTale. For now, uses tiles off of the Dungeon Crawl Stone Soup tileset.
  */
-var LevelGenerator = require('mapgen.js');
-var HeightMapGenerator = require('canvasTerrain.js');
+var LevelGenerator = require('./mapgen.js');
+var HeightMapGenerator = require('./canvasTerrain.js');
 
 WorldGenerator.prototype = new LevelGenerator();
 WorldGenerator.prototype.constructor = WorldGenerator;
