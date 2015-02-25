@@ -90,19 +90,19 @@ function create() {
     socket.on("request map", function(data) {
         newMap = data;
         map = game.load.tilemap('level2', '', newMap, Phaser.TileMap.TILED_JSON);
+        map.addTilesetImage('tiles1', 'tiles');
+        layer = map.createLayer('World1');
+        layer.resizeWorld();
+        layer.wrap = true;
+        layer.fixedToCamera = true;
+        layer.smoothed = false;
+        layer.setScale(2);
+
+        map.setCollision(tileTypes.grass, true, layer, true);
     });
 
     socket.emit("request map");
     // map = game.add.tilemap('level');
-    map.addTilesetImage('tiles1', 'tiles');
-    layer = map.createLayer('World1');
-    layer.resizeWorld();
-    layer.wrap = true;
-    layer.fixedToCamera = true;
-    layer.smoothed = false;
-    layer.setScale(2);
-
-    map.setCollision(tileTypes.grass, true, layer, true);
 
     var startX = Math.round(Math.random()*(1000)-500),
         startY = Math.round(Math.random()*(1000)-500);
