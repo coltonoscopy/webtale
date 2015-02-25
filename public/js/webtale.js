@@ -166,7 +166,7 @@ function create() {
         });
 
         if (move)
-            game.add.tween(sprite).from({x: player.x}, player.x + 32, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(player).from({x: player.x}, player.x + 32, Phaser.Easing.Bounce.Out, true);
             // player.x -= 32;
     });
 
