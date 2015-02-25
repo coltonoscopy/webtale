@@ -79,6 +79,7 @@ var newMap;
 var gamemode = 0;
 
 var collisionTiles = [];
+var tileX, tileY;
 
 function create() {
     socket = io('http://coltonoscopy.com:8120');
@@ -103,8 +104,10 @@ function create() {
     layer.smoothed = false;
     // layer.setScale(2);
 
-    var startX = Math.round(Math.random()*(1000)-500),
-        startY = Math.round(Math.random()*(1000)-500);
+    // derive actual coordinates from tile-based coordinates
+    tileX = 0; tileY = 0;
+    var startX = tileX * 32;
+    var startY = tileY * 32;
 
     player = game.add.sprite(startX, startY, 'icons');
     player.frame = 1985;
@@ -165,9 +168,10 @@ function create() {
             }
         });
 
-        if (move)
+        if (move && player.x % 32 === 0)
         {
-            player.x -= 32;
+            tileX -= 1;
+            player.x = tileX * 32;
             game.add.tween(player).from({x: player.x + 32}, 200, Phaser.Easing.Linear.None, true);
         }
     });
@@ -182,9 +186,10 @@ function create() {
             }
         });
 
-        if (move)
+        if (move && player.x % 32 === 0)
         {
-            player.x += 32;
+            tileX += 1;
+            player.x = tileX * 32;
             game.add.tween(player).from({x: player.x - 32}, 200, Phaser.Easing.Linear.None, true);
         }
     });
@@ -199,9 +204,10 @@ function create() {
             }
         });
 
-        if (move)
+        if (move && player.y % 32 === 0)
         {
-            player.y -= 32;
+            tileY -= 1;
+            player.y = tileY * 32;
             game.add.tween(player).from({y: player.y + 32}, 200, Phaser.Easing.Linear.None, true);
         }
     });
@@ -216,9 +222,10 @@ function create() {
             }
         });
 
-        if (move)
+        if (move && player.y % 32 === 0)
         {
-            player.y += 32;
+            tileY += 1;
+            player.y = tileY * 32;
             game.add.tween(player).from({y: player.y - 32}, 200, Phaser.Easing.Linear.None, true);
         }
     });

@@ -16,7 +16,7 @@ while (!playersDead && !enemiesDead) {
     playersDead = groupAlive(playerParty);
     enemiesDead = groupAlive(enemyParty);
 
-
+    
 }
 
 /**
