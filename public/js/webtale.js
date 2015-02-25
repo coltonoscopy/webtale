@@ -102,6 +102,10 @@ function create() {
     });
 
     socket.emit("request map");
+    timer = game.time.create(false);
+    while (map === undefined)
+        timer.pause(2000);
+    
     // map = game.add.tilemap('level');
 
     var startX = Math.round(Math.random()*(1000)-500),
