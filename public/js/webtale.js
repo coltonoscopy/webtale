@@ -162,9 +162,13 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            if (element === map.getTileWorldXY(player.x - 32, player.y).index)
+            var tile = map.getTileWorldXY(player.x - 32, player.y);
+            if (tile !== null)
             {
-                move = false;
+                if (element === tile.index)
+                {
+                    move = false;
+                }
             }
         });
 
@@ -180,9 +184,13 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            if (element === map.getTileWorldXY(player.x + 32, player.y).index)
+            var tile = map.getTileWorldXY(player.x + 32, player.y);
+            if (tile !== null)
             {
-                move = false;
+                if (element === tile.index)
+                {
+                    move = false;
+                }
             }
         });
 
@@ -198,9 +206,13 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            if (element === map.getTileWorldXY(player.x, player.y - 32).index)
+            var tile = map.getTileWorldXY(player.x, player.y - 32);
+            if (tile !== null)
             {
-                move = false;
+                if (element === tile.index)
+                {
+                    move = false;
+                }
             }
         });
 
@@ -216,9 +228,13 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            if (element === map.getTileWorldXY(player.x, player.y + 32).index)
+            var tile = map.getTileWorldXY(player.x, player.y + 32);
+            if (tile !== null)
             {
-                move = false;
+                if (element === tile.index)
+                {
+                    move = false;
+                }
             }
         });
 
