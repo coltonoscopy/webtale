@@ -166,8 +166,10 @@ function create() {
         });
 
         if (move)
+        {
             player.x -= 32;
-            game.add.tween(player).from({x: player.x + 32}, 1000, Phaser.Easing.Linear.None, true);
+            game.add.tween(player).from({x: player.x + 32}, 200, Phaser.Easing.Linear.None, true);
+        }
     });
 
     cursors.right.onDown.add(function() {
@@ -181,7 +183,10 @@ function create() {
         });
 
         if (move)
+        {
             player.x += 32;
+            game.add.tween(player).from({x: player.x - 32}, 200, Phaser.Easing.Linear.None, true);
+        }
     });
 
     cursors.up.onDown.add(function() {
@@ -195,7 +200,10 @@ function create() {
         });
 
         if (move)
+        {
             player.y -= 32;
+            game.add.tween(player).from({y: player.y + 32}, 200, Phaser.Easing.Linear.None, true);
+        }
     });
 
     cursors.down.onDown.add(function() {
@@ -209,7 +217,10 @@ function create() {
         });
 
         if (move)
+        {
             player.y += 32;
+            game.add.tween(player).from({y: player.y - 32}, 200, Phaser.Easing.Linear.None, true);
+        }
     });
 
     setEventHandlers();
