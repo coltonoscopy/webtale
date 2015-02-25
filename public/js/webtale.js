@@ -99,7 +99,7 @@ function create() {
     layer.wrap = true;
     layer.fixedToCamera = true;
     layer.smoothed = false;
-    layer.setScale(2);
+    // layer.setScale(2);
 
     var startX = Math.round(Math.random()*(1000)-500),
         startY = Math.round(Math.random()*(1000)-500);
@@ -153,19 +153,19 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
     cursors.left.onDown.add(function() {
-        player.x -= 64;
+        player.x -= 32;
     });
 
     cursors.right.onDown.add(function() {
-        player.x += 64;
+        player.x += 32;
     });
 
     cursors.up.onDown.add(function() {
-        player.y -= 64;
+        player.y -= 32;
     });
 
     cursors.down.onDown.add(function() {
-        player.y += 64;
+        player.y += 32;
     });
 
     setEventHandlers();
