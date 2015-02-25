@@ -86,7 +86,7 @@ function onNewMap() {
 
 function onRequestMap() {
     var generator = new WorldGenerator();
-    var map = generator.generate();
+    var map = generator.generate(200, 200);
     this.broadcast.emit("change map", map);
 }
 
