@@ -167,7 +167,7 @@ function create() {
 
         if (move)
             player.x -= 32;
-            game.add.tween(player).from({x: player.x + 32}, 1000, Phaser.Easing.Bounce.Out, true);
+            game.add.tween(player).from({x: player.x + 32}, 1000, Phaser.Easing.Linear, true);
     });
 
     cursors.right.onDown.add(function() {
