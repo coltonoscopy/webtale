@@ -43,7 +43,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
     game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
     game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
-    game.load.tilemap('level', 'assets/world.json', null, Phaser.Tilemap.TILED_JSON);
+    // game.load.tilemap('level', 'assets/world.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/tiles1.png');
 }
 
@@ -88,8 +88,8 @@ function create() {
 
     // set a sock
     socket.on("request map", function(data) {
-        map = data;
-        game.load.tilemap('level2', '', map, Phaser.TileMap.TILED_JSON);
+        newMap = data;
+        map = game.load.tilemap('level2', '', newMap, Phaser.TileMap.TILED_JSON);
     });
 
     socket.emit("request map");
