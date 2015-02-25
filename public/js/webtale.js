@@ -111,7 +111,6 @@ function create() {
 
     player = game.add.sprite(startX, startY, 'icons');
     player.frame = 1985;
-    player.anchor.setTo(0.5, 0.5);
     // player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
     // player.animations.add('stop', [3], 20, true);
 
@@ -170,13 +169,16 @@ function create() {
                     move = false;
                 }
             }
+            else {
+                move = false;
+            }
         });
 
         if (move && player.x % 32 === 0)
         {
             tileX -= 1;
             player.x = tileX * 32;
-            game.add.tween(player).from({x: player.x + 32}, 200, Phaser.Easing.Linear.None, true);
+            game.add.tween(player).from({x: player.x + 32}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -193,13 +195,19 @@ function create() {
                     move = false;
                 }
             }
+            else {
+                move = false;
+            }
         });
 
+        console.log("Player's X: " + player.x);
+        console.log(player.x % 32);
         if (move && player.x % 32 === 0)
         {
             tileX += 1;
             player.x = tileX * 32;
-            game.add.tween(player).from({x: player.x - 32}, 200, Phaser.Easing.Linear.None, true);
+            console.log(player.x);
+            game.add.tween(player).from({x: player.x - 32}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -215,13 +223,16 @@ function create() {
                     move = false;
                 }
             }
+            else {
+                move = false;
+            }
         });
 
         if (move && player.y % 32 === 0)
         {
             tileY -= 1;
             player.y = tileY * 32;
-            game.add.tween(player).from({y: player.y + 32}, 200, Phaser.Easing.Linear.None, true);
+            game.add.tween(player).from({y: player.y + 32}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -237,13 +248,16 @@ function create() {
                     move = false;
                 }
             }
+            else {
+                move = false;
+            }
         });
 
         if (move && player.y % 32 === 0)
         {
             tileY += 1;
             player.y = tileY * 32;
-            game.add.tween(player).from({y: player.y - 32}, 200, Phaser.Easing.Linear.None, true);
+            game.add.tween(player).from({y: player.y - 32}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
