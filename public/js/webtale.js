@@ -43,7 +43,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
     game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
     game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
-    game.load.tilemap('level', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('level', 'assets/dungeon.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/tiles1.png');
 }
 
@@ -68,7 +68,10 @@ var tileTypes = {
     forest: 878,
     mountain: 872,
     river: 1254,
-    dungeon: 983
+    dungeon: 983,
+    floor: 813,
+    empty: null,
+    walls: 1033
 };
 
 var minimap;
@@ -95,7 +98,7 @@ function create() {
     // });
 
     // socket.emit("request map");
-    map = game.add.tilemap('level', 32, 32, 200, 200);
+    map = game.add.tilemap('level', 32, 32, 100, 100);
     map.addTilesetImage('tiles1', 'tiles');
     layer = map.createLayer('World1');
     layer.resizeWorld();
@@ -105,7 +108,9 @@ function create() {
     // layer.setScale(2);
 
     // derive actual coordinates from tile-based coordinates
-    tileX = 0; tileY = 0;
+    var firstTile = grabFirstFloorTile();
+    tileX = firstTile.x;
+    tileY = firstTile.y;
     var startX = tileX * 32;
     var startY = tileY * 32;
 
@@ -263,6 +268,18 @@ function create() {
 
     setEventHandlers();
 }
+
+var grabFirstFloorTile = function() {
+    for (var i = 0; i < map.width * map.height; i++) {
+        console.log("X: " + i % map.height + ", Y: " + Math.floor(i / map.height));
+        if (map.getTile(i % map.height, Math.floor(i /map.height)) !== null)
+        {
+            if (map.getTile(i % map.height, Math.floor(i / map.height)).index === tileTypes.floor)
+                return {x: i % map.height, y: Math.floor(i / map.height)};
+        }
+    }
+    return {x: 0, y: 0};
+};
 
 var setEventHandlers = function() {
     socket.on("connect", onSocketConnected);
