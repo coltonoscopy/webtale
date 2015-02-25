@@ -43,7 +43,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
     game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
     game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
-    // game.load.tilemap('level', 'assets/world.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('level', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/tiles1.png');
 }
 
@@ -87,25 +87,25 @@ function create() {
     game.world.setBounds(-500, -500, 1000, 1000);
 
     // set a sock
-    socket.on("request map", function(data) {
-        newMap = data;
-        map = game.load.tilemap('level2', '', newMap, Phaser.TileMap.TILED_JSON);
-        map.addTilesetImage('tiles1', 'tiles');
-        layer = map.createLayer('World1');
-        layer.resizeWorld();
-        layer.wrap = true;
-        layer.fixedToCamera = true;
-        layer.smoothed = false;
-        layer.setScale(2);
+    // socket.on("request map", function(data) {
+    //     newMap = data;
+    // });
+
+    // socket.emit("request map");
+    map = game.add.tilemap('level', 32, 32, 200, 200);
+    map.addTilesetImage('tiles1', 'tiles');
+    layer = map.createLayer('World1');
+    layer.resizeWorld();
+    layer.wrap = true;
+    layer.fixedToCamera = true;
+    layer.smoothed = false;
+    layer.setScale(2);
 
         map.setCollision(tileTypes.grass, true, layer, true);
-    });
-
-    socket.emit("request map");
     timer = game.time.create(false);
     while (map === undefined)
         timer.pause(2000);
-    
+
     // map = game.add.tilemap('level');
 
     var startX = Math.round(Math.random()*(1000)-500),

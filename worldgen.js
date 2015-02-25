@@ -7,6 +7,9 @@
 // WorldGenerator.prototype = new LevelGenerator();
 // WorldGenerator.prototype.constructor = WorldGenerator;
 
+jf = require('jsonfile');
+
+
 function WorldGenerator() {
     // IDs within the sprite sheet that map to the tiles we want to put in the map
     var tileMappings = {
@@ -158,5 +161,13 @@ var PerlinNoise = function() {
        }
        function scale(n) { return (1 + n)/2; }
 };
+
+var gen = WorldGenerator();
+var map = gen.generate(200, 200);
+var file = 'public/assets/level2.json';
+
+jf.writeFile(file, map, function(err) {
+    console.log(err);
+});
 
 exports.WorldGenerator = WorldGenerator;
