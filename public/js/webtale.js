@@ -78,6 +78,8 @@ var newMap;
 // 0 = exploration, 1 = combat
 var gamemode = 0;
 
+var collisionTiles = [];
+
 function create() {
     socket = io('http://coltonoscopy.com:8120');
 
@@ -116,6 +118,7 @@ function create() {
     player.body.collideWorldBounds = true;
 
     map.setCollision(tileTypes.ocean, true, layer, true);
+    collisionTiles.push(tileTypes.ocean);
 
     enemies = [];
 
@@ -153,19 +156,59 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
     cursors.left.onDown.add(function() {
-        player.x -= 32;
+        var move = true;
+
+        collisionTiles.forEach(function(element, index, array) {
+            if (element === map.getTileWorldXY(player.x - 32, player.y).index)
+            {
+                move = false;
+            }
+        });
+
+        if (move)
+            player.x -= 32;
     });
 
     cursors.right.onDown.add(function() {
-        player.x += 32;
+        var move = true;
+
+        collisionTiles.forEach(function(element, index, array) {
+            if (element === map.getTileWorldXY(player.x + 32, player.y).index)
+            {
+                move = false;
+            }
+        });
+
+        if (move)
+            player.x += 32;
     });
 
     cursors.up.onDown.add(function() {
-        player.y -= 32;
+        var move = true;
+
+        collisionTiles.forEach(function(element, index, array) {
+            if (element === map.getTileWorldXY(player.x, player.y + 32).index)
+            {
+                move = false;
+            }
+        });
+
+        if (move)
+            player.y += 32;
     });
 
     cursors.down.onDown.add(function() {
-        player.y += 32;
+        var move = true;
+
+        collisionTiles.forEach(function(element, index, array) {
+            if (element === map.getTileWorldXY(player.x, player.y - 32).index)
+            {
+                move = false;
+            }
+        });
+
+        if (move)
+            player.y -= 32;
     });
 
     setEventHandlers();
