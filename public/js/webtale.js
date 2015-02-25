@@ -72,6 +72,7 @@ var tileTypes = {
 };
 
 var minimap;
+var newMap;
 
 // game mode represents whether we're in exploration or combat mode
 // 0 = exploration, 1 = combat
@@ -85,7 +86,14 @@ function create() {
     game.scale.refresh();
     game.world.setBounds(-500, -500, 1000, 1000);
 
-    map = game.add.tilemap('level');
+    // set a sock
+    socket.on("request map", function(data) {
+        map = data;
+        game.load.tilemap('level2', '', map, Phaser.TileMap.TILED_JSON);
+    });
+
+    socket.emit("request map");
+    // map = game.add.tilemap('level');
     map.addTilesetImage('tiles1', 'tiles');
     layer = map.createLayer('World1');
     layer.resizeWorld();

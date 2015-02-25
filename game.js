@@ -3,7 +3,7 @@ var io = require("socket.io")({
     'transports': ['websocket']
 });
 var Player = require("./Player").Player;
-var WorldGenerator = require('./WorldGenerator.js').WorldGenerator;
+var WorldGenerator = require('./worldgen.js').WorldGenerator;
 
 var socket,
     players,
@@ -31,6 +31,8 @@ function onSocketConnection(client) {
     client.on("move player", onMovePlayer);
 
     client.on("new map", onNewMap);
+
+    client.on("request map", onRequestMap);
 }
 
 function onClientDisconnect() {
@@ -80,6 +82,11 @@ function onMovePlayer(data) {
 
 function onNewMap() {
     
+}
+
+function onRequestMap() {
+    var map = WorldGenerator.generate();
+    this.broadcast.emit("change map", map);
 }
 
 function playerById(id) {
