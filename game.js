@@ -2,8 +2,9 @@ var util = require("util");
 var io = require("socket.io")({
     'transports': ['websocket']
 });
+var jf = require('jsonfile');
 var Player = require("./Player").Player;
-var WorldGenerator = require('./worldgen.js').WorldGenerator;
+var DungeonGenerator = require('./dungeongen.js').DungeonGenerator;
 
 var socket,
     players,
@@ -11,6 +12,13 @@ var socket,
 
 function init() {
     players = [];
+    var dunGen = new DungeonGenerator();
+    var obj = dunGen.generate(100);
+    var file = 'public/assets/dungeon.json';
+
+    jf.writeFile(file, obj, function(err) {
+        console.log(err);
+    });
 
     socket = io.listen(8120);
 
