@@ -2,6 +2,7 @@
  * Generates a dungeon to be used in our game.
  */
 jf = require('jsonfile');
+ROT = require('./public/js/rot.js');
 
 function DungeonGenerator() {
     this.rooms = [];
@@ -11,7 +12,7 @@ DungeonGenerator.prototype.generate = function(size) {
     var obj = {};
     var height = size;
     var width = size;
-    var numbers = new Array(height * width);
+    var map = new Array(height * width);
     var room;
     var mapSize;
     var max, min;
@@ -26,7 +27,7 @@ DungeonGenerator.prototype.generate = function(size) {
     mapSize = size;
     
     for (var i = 0; i < height * width; i++) {
-        numbers[i] = tileMappings.empty;
+        map[i] = tileMappings.empty;
     }
 
     var roomCount = this.randomIntInc(10, 20);
@@ -36,10 +37,10 @@ DungeonGenerator.prototype.generate = function(size) {
     for (i = 0; i < roomCount; i++) {
         room = {};
 
-        room.x = this.randomInt(1, mapSize - maxSize - 1);
-        room.y = this.randomInt(1, mapSize - maxSize - 1);
-        room.w = this.randomInt(minSize, maxSize);
-        room.h = this.randomInt(minSize, maxSize);
+        room.x = this.Helpers.GetRandom(1, mapSize - maxSize - 1);
+        room.y = this.Helpers.GetRandom(1, mapSize - maxSize - 1);
+        room.w = this.Helpers.GetRandom(minSize, maxSize);
+        room.h = this.Helpers.GetRandom(minSize, maxSize);
 
         if (this.DoesCollide(room)) {
             i--;
@@ -57,14 +58,16 @@ DungeonGenerator.prototype.generate = function(size) {
     for (i = 0; i < roomCount; i++) {
         var roomA = this.rooms[i];
         var roomB = this.FindClosestRoom(roomA);
+
         pointA = {
-            x: this.randomInt(roomA.x, roomA.x + roomA.w),
-            y: this.randomInt(roomA.y, roomA.y + roomA.h)
+            x: this.Helpers.GetRandom(roomA.x, roomA.x + roomA.w),
+            y: this.Helpers.GetRandom(roomA.y, roomA.y + roomA.h)
         };
         pointB = {
-            x: this.randomInt(roomB.x, roomB.x + roomB.w),
-            y: this.randomInt(roomB.y, roomB.y + roomB.h)
+            x: this.Helpers.GetRandom(roomB.x, roomB.x + roomB.w),
+            y: this.Helpers.GetRandom(roomB.y, roomB.y + roomB.h)
         };
+
         while ((pointB.x != pointA.x) || (pointB.y != pointA.y)) {
             if (pointB.x != pointA.x) {
                 if (pointB.x > pointA.x) pointB.x--;
@@ -75,7 +78,7 @@ DungeonGenerator.prototype.generate = function(size) {
                 else pointB.y++;
             }
 
-            numbers[pointB.y * height + pointB.x] = tileMappings.floor;
+            map[pointB.y * size + pointB.x] = tileMappings.floor;
         }
     }
 
@@ -87,7 +90,7 @@ DungeonGenerator.prototype.generate = function(size) {
 
         for (x = room.x; x < room.x + room.w; x++) {
             for (y = room.y; y < room.y + room.h; y++) {
-                numbers[y * height + x] = tileMappings.floor;
+                map[y * size + x] = tileMappings.floor;
             }
         }
     }
@@ -95,10 +98,10 @@ DungeonGenerator.prototype.generate = function(size) {
     // build walls
     for (x = 0; x < mapSize; x++) {
         for (y = 0; y < mapSize; y++) {
-            if (numbers[y * height + x] == tileMappings.floor) {
+            if (map[y * size + x] == tileMappings.floor) {
                 for (var xx = x - 1; xx <= x + 1; xx++) {
                     for (var yy = y - 1; yy <= y + 1; yy++) {
-                        if (numbers[size * yy + xx] == tileMappings.empty) numbers[size * yy + xx] = tileMappings.walls;
+                        if (map[size * yy + xx] == tileMappings.empty) map[size * yy + xx] = tileMappings.walls;
                     }
                 }
             }
@@ -113,7 +116,7 @@ DungeonGenerator.prototype.generate = function(size) {
     obj.tilewidth = 32;
     obj.layers = [];
     obj.layers[0] = {
-        data: numbers,
+        data: map,
         height: obj.height,
         name: 'World1',
         opacity: 1,
@@ -141,7 +144,7 @@ DungeonGenerator.prototype.generate = function(size) {
     ];
     obj.version = 1;
 
-    obj.tiles = numbers;
+    obj.tiles = map;
 
     return obj;
 };
@@ -160,7 +163,7 @@ DungeonGenerator.prototype.FindClosestRoom = function(room) {
             x: check.x + (check.w / 2),
             y: check.y + (check.h / 2)
         };
-        var distance = Math.abs(mid.x - checkMid.x) + Math.abs(mid.y - checkMid.y);
+        var distance = Math.min(Math.abs(mid.x - checkMid.x) - (room.w / 2) - (check.w / 2), Math.abs(mid.y - checkMid.y) - (room.h / 2) - (check.h / 2));
         if (distance < closestDistance) {
             closestDistance = distance;
             closest = check;
@@ -213,6 +216,12 @@ DungeonGenerator.prototype.randomInt = function(low, high) {
 
 DungeonGenerator.prototype.randomIntInc = function(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
+};
+
+DungeonGenerator.prototype.Helpers = {
+    GetRandom: function (low, high) {
+        return~~ (Math.random() * (high - low)) + low;
+    }
 };
 
 // var gen = DungeonGenerator();

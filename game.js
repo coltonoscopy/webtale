@@ -4,7 +4,7 @@ var io = require("socket.io")({
 });
 var jf = require('jsonfile');
 var Player = require("./Player").Player;
-var DungeonGenerator = require('./dungeongen.js').DungeonGenerator;
+var DungeonGenerator = require('./rotdungeon.js').DungeonGenerator;
 
 var socket,
     players,
@@ -13,7 +13,7 @@ var socket,
 function init() {
     players = [];
     var dunGen = new DungeonGenerator();
-    var obj = dunGen.generate(100);
+    var obj = dunGen.generate(64, 64);
     var file = 'public/assets/dungeon.json';
 
     jf.writeFile(file, obj, function(err) {
