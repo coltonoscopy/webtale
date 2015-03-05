@@ -20,7 +20,7 @@ DungeonGenerator.prototype.generate = function(width, height) {
 
     ROT.RNG.setSeed(Math.floor(Math.random() * 123456789));
 
-    var rotMap = new ROT.Map.Digger(width, height);
+    var rotMap = new ROT.Map.Digger(width, height, {dugPercentage: 0.9});
     rotMap.create(function(x, y, type) {
         console.log(type);
         if (type === 1)

@@ -105,17 +105,20 @@ function create() {
     layer.wrap = true;
     layer.fixedToCamera = true;
     layer.smoothed = false;
-    // layer.setScale(2);
+    layer.setScale(2);
+
+    console.log('layer scaled!');
 
     // derive actual coordinates from tile-based coordinates
     var firstTile = grabFirstFloorTile();
     tileX = firstTile.x;
     tileY = firstTile.y;
-    var startX = tileX * 32;
-    var startY = tileY * 32;
+    var startX = tileX * 64;
+    var startY = tileY * 64;
 
     player = game.add.sprite(startX, startY, 'icons');
     player.frame = 1985;
+    player.width = player.height = 64;
     // player.animations.add('move', [0,1,2,3,4,5,6,7], 20, true);
     // player.animations.add('stop', [3], 20, true);
 
@@ -124,12 +127,13 @@ function create() {
     player.body.maxVelocity.setTo(400, 400);
     player.body.collideWorldBounds = true;
 
-    map.setCollision(tileTypes.ocean, true, layer, true);
-    collisionTiles.push(tileTypes.ocean);
+    // map.setCollision(tileTypes.empty, true, layer, true);
+    // collisionTiles.push(tileTypes.empty || 50);
 
     enemies = [];
 
     player.bringToTop();
+    console.log("After bringing player to top");
 
     //
     // TODO: fix this section of the code to show minimap
@@ -162,11 +166,13 @@ function create() {
 
     cursors = game.input.keyboard.createCursorKeys();
 
+    var movement = 64;
+
     cursors.left.onDown.add(function() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x - 32, player.y);
+            var tile = map.getTileWorldXY(player.x - movement, player.y);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -179,11 +185,11 @@ function create() {
             }
         });
 
-        if (move && player.x % 32 === 0)
+        if (move && player.x % movement === 0)
         {
             tileX -= 1;
-            player.x = tileX * 32;
-            game.add.tween(player).from({x: player.x + 32}, 100, Phaser.Easing.Linear.None, true);
+            player.x = tileX * movement;
+            game.add.tween(player).from({x: player.x + movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -191,8 +197,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x + 32, player.y);
-            console.log(tile);
+            var tile = map.getTileWorldXY(player.x + movement, player.y);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -205,14 +210,11 @@ function create() {
             }
         });
 
-        console.log("Player's X: " + player.x);
-        console.log(player.x % 32);
-        if (move && player.x % 32 === 0)
+        if (move && player.x % movement === 0)
         {
             tileX += 1;
-            player.x = tileX * 32;
-            console.log(player.x);
-            game.add.tween(player).from({x: player.x - 32}, 100, Phaser.Easing.Linear.None, true);
+            player.x = tileX * movement;
+            game.add.tween(player).from({x: player.x - movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -220,7 +222,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x, player.y - 32);
+            var tile = map.getTileWorldXY(player.x, player.y - movement);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -233,11 +235,11 @@ function create() {
             }
         });
 
-        if (move && player.y % 32 === 0)
+        if (move && player.y % movement === 0)
         {
             tileY -= 1;
-            player.y = tileY * 32;
-            game.add.tween(player).from({y: player.y + 32}, 100, Phaser.Easing.Linear.None, true);
+            player.y = tileY * movement;
+            game.add.tween(player).from({y: player.y + movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -245,7 +247,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x, player.y + 32);
+            var tile = map.getTileWorldXY(player.x, player.y + movement);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -258,11 +260,11 @@ function create() {
             }
         });
 
-        if (move && player.y % 32 === 0)
+        if (move && player.y % movement === 0)
         {
             tileY += 1;
-            player.y = tileY * 32;
-            game.add.tween(player).from({y: player.y - 32}, 100, Phaser.Easing.Linear.None, true);
+            player.y = tileY * movement;
+            game.add.tween(player).from({y: player.y - movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
@@ -272,7 +274,7 @@ function create() {
 var grabFirstFloorTile = function() {
     for (var i = 0; i < map.width * map.height; i++) {
         console.log("X: " + i % map.height + ", Y: " + Math.floor(i / map.height));
-        if (map.getTile(i % map.height, Math.floor(i /map.height)) !== null)
+        if (map.getTile(i % map.height, Math.floor(i / map.height)) !== null)
         {
             if (map.getTile(i % map.height, Math.floor(i / map.height)).index === tileTypes.floor)
                 return {x: i % map.height, y: Math.floor(i / map.height)};

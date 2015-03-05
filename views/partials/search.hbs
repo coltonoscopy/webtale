@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-info ">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-search"></i> Search a game</h3>
+            </div>
+            <form id="gameSearchForm" role="form">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="white">White player</label>
+                        <input type="text" class="form-control" id="white" name="white" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="black">Black player</label>
+                        <input type="text" class="form-control" id="black" name="black">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">PGN Content</label>
+                        <input type="text" class="form-control" id="content" name="content">
+                    </div>
+                    <div class="form-group">
+                        <label for="result">Result</label>
+                        <input type="text" class="form-control" id="result" name="result">
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <p><button id="searchGameFormSubmit" type="button" class="btn btn-default center-block">Submit</button></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="searchResult" hidden="hidden">
+        <table id="foundGamesTable" class="table table-bordered table-striped table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>White</th>
+                <th>Black</th>
+                <th>Result</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="text-center">Total games = <span id="totalFoundGames" class="badge badge-inverse">0</span></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -8,10 +8,12 @@ var DungeonGenerator = require('./rotdungeon.js').DungeonGenerator;
 
 var socket,
     players,
+    monsters,
     world;
 
 function init() {
     players = [];
+    monsters = [];
     var dunGen = new DungeonGenerator();
     var obj = dunGen.generate(64, 64);
     var file = 'public/assets/dungeon.json';
