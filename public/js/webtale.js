@@ -127,8 +127,7 @@ function create() {
     player.body.maxVelocity.setTo(400, 400);
     player.body.collideWorldBounds = true;
 
-    // map.setCollision(tileTypes.empty, true, layer, true);
-    // collisionTiles.push(tileTypes.empty || 50);
+    collisionTiles.push(tileTypes.empty);
 
     enemies = [];
 
@@ -172,7 +171,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x - movement, player.y);
+            var tile = map.getTile(tileX - 1, tileY, layer);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -185,7 +184,7 @@ function create() {
             }
         });
 
-        if (move && player.x % movement === 0)
+        if (move && player.x % movement === 0 && tileX - 1 >= 0)
         {
             tileX -= 1;
             player.x = tileX * movement;
@@ -195,9 +194,10 @@ function create() {
 
     cursors.right.onDown.add(function() {
         var move = true;
+        console.log('Trying to move right!');
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x + movement, player.y);
+            var tile = map.getTile(tileX + 1, tileY, layer);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -210,7 +210,7 @@ function create() {
             }
         });
 
-        if (move && player.x % movement === 0)
+        if (move && player.x % movement === 0 && tileX < map.width)
         {
             tileX += 1;
             player.x = tileX * movement;
@@ -222,7 +222,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x, player.y - movement);
+            var tile = map.getTile(tileX, tileY - 1, layer);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -235,7 +235,7 @@ function create() {
             }
         });
 
-        if (move && player.y % movement === 0)
+        if (move && player.y % movement === 0 && tileY >= 0)
         {
             tileY -= 1;
             player.y = tileY * movement;
@@ -247,7 +247,7 @@ function create() {
         var move = true;
 
         collisionTiles.forEach(function(element, index, array) {
-            var tile = map.getTileWorldXY(player.x, player.y + movement);
+            var tile = map.getTile(tileX, tileY + 1, layer);
             if (tile !== null)
             {
                 if (element === tile.index)
@@ -260,7 +260,7 @@ function create() {
             }
         });
 
-        if (move && player.y % movement === 0)
+        if (move && player.y % movement === 0 && tileY < map.height)
         {
             tileY += 1;
             player.y = tileY * movement;
