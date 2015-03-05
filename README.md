@@ -7,17 +7,17 @@ http://web-tale.com:5000/
 
 ## Technologies Used:
 
-Phaser
-rot.js
-Node
-socket.io
-gamehub.io
+* Phaser
+* rot.js
+* Node
+* socket.io
+* gamehub.io
 
 ## What do we have?
 
-Very basic stuff; multiplayer movement on a ROT.js-generated tile map.
+* Very basic stuff; multiplayer movement on a ROT.js-generated tile map.
 
 ## What's next?
 
-Player stats on the screen.
-Basic combat.
+* Player stats on the screen.
+* Basic combat.
