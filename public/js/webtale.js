@@ -45,6 +45,7 @@ function preload() {
     game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
     game.load.tilemap('level', 'assets/dungeon.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/tiles1.png');
+    game.load.image('healthHUD', 'assets/ui_upscaled_0.png');
 }
 
 var socket;
@@ -76,6 +77,8 @@ var tileTypes = {
 
 var minimap;
 var newMap;
+
+var healthHUD;
 
 // game mode represents whether we're in exploration or combat mode
 // 0 = exploration, 1 = combat
@@ -133,6 +136,9 @@ function create() {
 
     player.bringToTop();
     console.log("After bringing player to top");
+
+    healthHUD = game.add.sprite(30, game.height - 95, 'healthHUD');
+    healthHUD.crop(new Phaser.Rectangle(15, 15, 216, 78));
 
     //
     // TODO: fix this section of the code to show minimap
