@@ -1,0 +1,104 @@
+{
+    "abilities": [
+        {
+            "name": "Acid Arrow",
+            "id": "acid_arrow",
+            "level": 2,
+            "types": ["ranged", "acid", "conjuration"],
+            "range": 10,
+            "damage": 8,
+            "damageType": "acid",
+            "effects": [
+                {
+                    "type": "dot",
+                    "amount": 8,
+                    "damageType": "acid",
+                    "durations": {
+                        "levels": [0, 3, 6, 9, 12, 15, 18],
+                        "amounts": [3, 4, 5, 6, 7, 8, 9]
+                    }
+                }
+            ],
+            "animations": [
+                {
+                    "type": "projectile",
+                    "timing": "start",
+                    "from": "caster",
+                    "to": "target",
+                    "image": "arrow",
+                    "tint": "green",
+                    "speed": "fast",
+                    "size": "medium"
+                },
+                {
+                    "type": "particle_burst",
+                    "timing": "hit",
+                    "location": "target",
+                    "image": "particle",
+                    "tint": "green",
+                    "amount": 100,
+                    "speed": "fast",
+                    "size": "tiny"
+                }
+            ]
+        },
+        {
+            "name": "Acid Fog",
+            "id": "acid_fog",
+            "level": 6,
+            "burst": 4,
+            "types": ["aoe", "acid", "conjuration"],
+            "effects": [
+                {
+                    "type": "aoe_dot",
+                    "amount": 8,
+                    "damageType": "acid",
+                    "duration": 3
+                }
+            ],
+            "animations": [
+                {
+                    "type": "particle_burst",
+                    "timing": "start",
+                    "location": "caster",
+                    "image": "smoke",
+                    "tint": "green",
+                    "amount": 100,
+                    "speed": "slow",
+                    "size": "medium"
+                }
+            ]
+        },
+        {
+            "name": "Acid Splash",
+            "id": "acid_splash",
+            "level": 0,
+            "types": ["acid", "ranged", "conjuration"],
+            "range": 3,
+            "damage": 3,
+            "damageType": "acid",
+            "animations": [
+                {
+                    "type": "projectile",
+                    "timing": "start",
+                    "from": "caster",
+                    "to": "target",
+                    "image": "fireball",
+                    "tint": "green",
+                    "speed": "medium",
+                    "size": "medium"
+                },
+                {
+                    "type": "particle_burst",
+                    "timing": "hit",
+                    "location": "target",
+                    "image": "particle",
+                    "tint": "green",
+                    "amount": 100,
+                    "speed": "fast",
+                    "size": "tiny"
+                }
+            ]
+        }
+    ]
+}

@@ -34,3 +34,101 @@ function groupAlive(entities) {
 
     return entitiesDead;
 }
+
+/**
+ * Goes through an ability's makeup and performs everything described within.
+ */
+function useAbility(user, ability) {
+    var i;
+    var attackData = {};
+
+    // first, check if any conditions must be met to use ability
+    if (ability.requires) {
+        for (i in ability.requires) {
+            if (i === "hasGrab") {
+
+            }
+        }
+    }
+
+    switch (ability.type) {
+        case "melee":
+            break;
+        case "close":
+            break;
+        case "ranged":
+            break;
+        case "mount":
+            break;
+    }
+
+    if (ability.blast) {
+
+    }
+    if (ability.burst) {
+        if (ability.burstMax) {
+
+        }
+    }
+    if (ability.chainDamage) {
+
+    }
+    if (ability.extraDamage) {
+
+    }
+    if (ability.recharge) {
+
+    }
+
+    // calculate effects
+    if (ability.effects) {
+        for (i = 0; i < ability.effects.length; i++) {
+            switch (ability.effects[i].type) {
+                case "buff":
+                    if (ability.effects[i].category) {
+
+                    }
+                    break;
+                case "dot":
+                    if (ability.effects[i].duration) {
+
+                    }
+                    if (ability.effects[i].durations) {
+
+                    }
+                    break;
+                case "grab":
+                    break;
+                case "pull":
+                    break;
+                case "reuse":
+                    break;
+                case "shift":
+                    break;
+                case "slow":
+                    break;
+            }
+        }
+    }
+
+    // create an animation object for each animation that will play when ability is used
+    if (ability.animations) {
+        for (i = 0; i < ability.animations.length; i++) {
+
+        }
+    }
+
+    inflict(attackData);
+}
+
+/**
+ * Inflicts damage on a target from a given target.
+ */
+function inflict(data) {
+    var totalDamage = damage;
+
+    // account for elemental damage
+    if (data.damageType !== "normal") {
+        totalDamage -= totalDamage * target.resistances.damageType;
+    }
+}

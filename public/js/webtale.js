@@ -35,6 +35,32 @@ RemotePlayer.prototype.update = function() {
     this.lastPosition.y = this.player.y;
 };
 
+RemoteMonster = function(index, game, player, startX, startY) {
+    var x = startX * 64 + 32;
+    var y = startY * 64 + 32;
+
+    this.game = game;
+    this.health = 3;
+    this.player = player;
+    this.alive = true;
+
+    this.player = game.add.sprite(x, y, 'icons');
+    this.player.frame = 195;
+    this.player.width = this.player.height = 64;
+
+    this.player.anchor.setTo(0.5, 0.5);
+
+    this.player.name = index.toString();
+    this.player.rotation = 0;
+
+    this.lastPosition = {x: x, y: y};
+};
+
+RemoteMonster.prototype.update = function() {
+    this.lastPosition.x = this.player.x;
+    this.lastPosition.y = this.player.y;
+};
+
 var game = new Phaser.Game(1280, 720, Phaser.AUTO, '', {preload: preload, create: create,
     update: update, render: render}, false, false);
 
@@ -43,7 +69,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 64, 64);
     game.load.spritesheet('enemy', 'assets/dude.png', 64, 64);
     game.load.spritesheet('icons', 'assets/tiles1.png', 32, 32);
-    game.load.tilemap('level', 'assets/dungeon.json', null, Phaser.Tilemap.TILED_JSON);
+    // game.load.tilemap('level', 'assets/dungeon.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/tiles1.png');
     game.load.image('healthHUD', 'assets/ui_upscaled_0.png');
 }
@@ -88,20 +114,27 @@ var collisionTiles = [];
 var tileX, tileY;
 
 function create() {
-    socket = io('http://coltonoscopy.com:8120');
+    socket = io('http://localhost:8120');
 
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.scale.refresh();
-    game.world.setBounds(-500, -500, 1000, 1000);
 
-    // set a sock
-    // socket.on("request map", function(data) {
-    //     newMap = data;
-    // });
+    socket.on("new monster", onNewMonster);
 
-    // socket.emit("request map");
-    map = game.add.tilemap('level', 32, 32, 100, 100);
+    // set a callback for when server sends us a map
+    socket.on("send map", function(data) {
+        mapData = game.create.tilemap('level', 32, 32, 64, 64);
+        mapData.layers = data.layers;
+        console.log(mapData.layers);
+    });
+
+    // send a request to get our server-provided map
+    socket.emit("request map", function(word) {
+        console.log(word);
+    });
+
+    map = game.add.tilemap('level', 32, 32, 64, 64);
     map.addTilesetImage('tiles1', 'tiles');
     layer = map.createLayer('World1');
     layer.resizeWorld();
@@ -110,14 +143,16 @@ function create() {
     layer.smoothed = false;
     layer.setScale(2);
 
+    game.world.setBounds(0, 0, 64 * map.width, 64 * map.height);
+
     console.log('layer scaled!');
 
     // derive actual coordinates from tile-based coordinates
     var firstTile = grabFirstFloorTile();
     tileX = firstTile.x;
     tileY = firstTile.y;
-    var startX = tileX * 64;
-    var startY = tileY * 64;
+    var startX = tileX * 64 + 32;
+    var startY = tileY * 64 + 32;
 
     player = game.add.sprite(startX, startY, 'icons');
     player.frame = 1985;
@@ -129,6 +164,7 @@ function create() {
 
     player.body.maxVelocity.setTo(400, 400);
     player.body.collideWorldBounds = true;
+    player.anchor.setTo(0.5, 0.5);
 
     collisionTiles.push(tileTypes.empty);
 
@@ -139,6 +175,7 @@ function create() {
 
     healthHUD = game.add.sprite(30, game.height - 95, 'healthHUD');
     healthHUD.crop(new Phaser.Rectangle(15, 15, 216, 78));
+    healthHUD.fixedToCamera = true;
 
     //
     // TODO: fix this section of the code to show minimap
@@ -190,10 +227,12 @@ function create() {
             }
         });
 
-        if (move && player.x % movement === 0 && tileX - 1 >= 0)
+        player.rotation = Math.PI / 2;
+
+        if (move && (player.x - player.width / 2) % movement === 0 && tileX - 1 >= 0)
         {
             tileX -= 1;
-            player.x = tileX * movement;
+            player.x = tileX * movement + player.width / 2;
             game.add.tween(player).from({x: player.x + movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
@@ -216,10 +255,12 @@ function create() {
             }
         });
 
-        if (move && player.x % movement === 0 && tileX < map.width)
+        player.rotation = -Math.PI / 2;
+
+        if (move && (player.x - player.width / 2) % movement === 0 && tileX < map.width)
         {
             tileX += 1;
-            player.x = tileX * movement;
+            player.x = tileX * movement + player.width / 2;
             game.add.tween(player).from({x: player.x - movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
@@ -241,10 +282,12 @@ function create() {
             }
         });
 
-        if (move && player.y % movement === 0 && tileY >= 0)
+        player.rotation = Math.PI;
+
+        if (move && (player.y - player.height / 2) % movement === 0 && tileY >= 0)
         {
             tileY -= 1;
-            player.y = tileY * movement;
+            player.y = tileY * movement + player.height / 2;
             game.add.tween(player).from({y: player.y + movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
@@ -266,16 +309,25 @@ function create() {
             }
         });
 
-        if (move && player.y % movement === 0 && tileY < map.height)
+        player.rotation = 0;
+
+        if (move && (player.y - player.height / 2) % movement === 0 && tileY < map.height)
         {
             tileY += 1;
-            player.y = tileY * movement;
+            player.y = tileY * movement + player.height / 2;
             game.add.tween(player).from({y: player.y - movement}, 100, Phaser.Easing.Linear.None, true);
         }
     });
 
     setEventHandlers();
 }
+
+/**
+ * Spawn a monster on the map.
+ */
+var onNewMonster = function(data) {
+    enemies.push(new RemoteMonster(data.id, game, player, data.x, data.y));
+};
 
 var grabFirstFloorTile = function() {
     for (var i = 0; i < map.width * map.height; i++) {
